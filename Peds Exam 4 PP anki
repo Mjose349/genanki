@@ -1,0 +1,44 @@
+import genanki
+
+# Define the model for the Anki cards
+model = genanki.Model(
+    1607392319,
+    'Simple Model',
+    fields=[
+        {'name': 'Question'},
+        {'name': 'Answer'},
+    ],
+    templates=[
+        {
+            'name': 'Card 1',
+            'qfmt': '{{Question}}',
+            'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
+        },
+    ])
+
+# Create the deck
+deck = genanki.Deck(
+    2059400110,
+    'Pediatric Exam 4')
+
+# Sample questions
+questions_and_answers = [
+    ("What is the maximum time blood should be infused during a transfusion?", "c) 4 hours"),
+    ("Which age group is at risk for iron deficiency anemia?", "b) 12-36 months"),
+    ("What is a common manifestation of anemia in children?", "b) Pallor"),
+    ("What should be given to exclusively breast-fed babies by 4 months to prevent iron deficiency anemia?", "b) Iron supplements"),
+    ("What is the most common cause of sickle cell crises?", "b) Infection"),
+    # Continue generating questions based on the content
+]
+
+# Add each question to the deck
+for question, answer in questions_and_answers:
+    note = genanki.Note(
+        model=model,
+        fields=[question, answer])
+    deck.add_note(note)
+
+# Save the deck to a file
+output_path = 'Pediatric_Exam_4_Anki.apkg'
+package = genanki.Package(deck)
+package.write_to_file(output_path)
